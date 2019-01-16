@@ -1,0 +1,6 @@
+{
+  "zone": "asia-northeast1-b",
+  "cluster_id": "example-cluster--asia-northeast1-b",
+  "node_pool_id": "default-pool",
+  "node_count": 0
+}
