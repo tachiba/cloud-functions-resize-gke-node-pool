@@ -2,29 +2,21 @@
 
 const Buffer = require("safe-buffer").Buffer;
 const container = require("@google-cloud/container");
-const client = new container.v1.ClusterManagerClient({
-  projectId: process.env.GCLOUD_PROJECT,
-});
+const client = new container.v1.ClusterManagerClient();
 
-exports.resizeGKENodePool = async (event) => {
-  try {
-    const pubsubMessage = event.data;
-    const payload = JSON.parse(Buffer.from(pubsubMessage.data, 'base64').toString());
+exports.resizeGKENodePool = async (data) => {
+  const payload = JSON.parse(Buffer.from(data.data, "base64").toString());
 
-    const request = {
-      zone:       payload.zone,
-      clusterId:  payload.cluster_id,
-      nodePoolId: payload.node_pool_id,
-      nodeCount:  payload.node_count,
-    };
+  const request = {
+    projectId:  process.env.GCLOUD_PROJECT,
+    zone:       payload.zone,
+    clusterId:  payload.cluster_id,
+    nodePoolId: payload.node_pool_id,
+    nodeCount:  payload.node_count,
+  };
 
-    await client.setNodePoolSize(request)
-      .then(data => {
-        // Operation pending.
-        const operation = data[0];
-        return operation.promise();
-      });
-  } catch (err) {
-    console.log(err);
-  }
+  const result = await client.setNodePoolSize(request);
+  const operation = result[0];
+
+  console.log(operation);
 };
