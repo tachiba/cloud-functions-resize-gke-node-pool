@@ -1,5 +1,5 @@
 {
-  "name": "resize-gke-cluster",
+  "name": "resize-gke-node-pool",
   "version": "0.0.1",
   "dependencies": {
     "@google-cloud/container": "^0.3.0",

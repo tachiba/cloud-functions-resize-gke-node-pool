@@ -6,7 +6,7 @@ const client = new container.v1.ClusterManagerClient({
   projectId: process.env.GCLOUD_PROJECT,
 });
 
-exports.resizeGKECluster = async (event) => {
+exports.resizeGKENodePool = async (event) => {
   try {
     const pubsubMessage = event.data;
     const payload = JSON.parse(Buffer.from(pubsubMessage.data, 'base64').toString());

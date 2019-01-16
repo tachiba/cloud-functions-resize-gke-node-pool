@@ -1,1 +1,1 @@
-# cloud-functions-resize-gke-cluster
+# cloud-functions-resize-gke-node-pool
