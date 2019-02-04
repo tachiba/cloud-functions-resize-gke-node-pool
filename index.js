@@ -4,8 +4,17 @@ const Buffer = require("safe-buffer").Buffer;
 const container = require("@google-cloud/container");
 const client = new container.v1.ClusterManagerClient();
 
-exports.resizeGKENodePool = async (data) => {
+/* SEE: https://cloud.google.com/functions/docs/bestpractices/retries#functions-tips-infinite-retries-node8 */
+const eventMaxAge = 10000;
+
+exports.resizeGKENodePool = async (data, context) => {
   const payload = JSON.parse(Buffer.from(data.data, "base64").toString());
+
+  const eventAge = Date.now() - Date.parse(context.timestamp);
+  if (eventAge > eventMaxAge) {
+    console.log(`Dropping event ${context.eventId} with age ${eventAge} ms.`);
+    return;
+  }
 
   const request = {
     projectId:  process.env.GCLOUD_PROJECT,
