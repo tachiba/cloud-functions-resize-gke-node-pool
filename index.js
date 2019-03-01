@@ -5,7 +5,7 @@ const container = require("@google-cloud/container");
 const client = new container.v1.ClusterManagerClient();
 
 /* SEE: https://cloud.google.com/functions/docs/bestpractices/retries#functions-tips-infinite-retries-node8 */
-const eventMaxAge = 10000;
+const eventMaxAge = 60 * 1000;
 
 exports.resizeGKENodePool = async (data, context) => {
   const payload = JSON.parse(Buffer.from(data.data, "base64").toString());
