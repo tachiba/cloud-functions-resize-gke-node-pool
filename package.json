@@ -4,6 +4,6 @@
   "dependencies": {
     "@google-cloud/container": "^0.3.0",
     "@google-cloud/pubsub": "^0.18.0",
-    "safe-buffer": "^5.1.2"
+    "safe-buffer": "^5.2.0"
   }
 }
