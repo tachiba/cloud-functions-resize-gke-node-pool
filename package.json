@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "@google-cloud/container": "^0.3.0",
-    "@google-cloud/pubsub": "^0.18.0",
+    "@google-cloud/pubsub": "^0.30.2",
     "safe-buffer": "^5.1.2"
   }
 }
