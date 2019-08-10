@@ -1,0 +1,21 @@
+version: 1
+update_configs:
+- package_manager: javascript
+  directory: /
+  update_schedule: live
+
+  automerged_updates:
+  - match:
+      dependency_type: development
+      update_type: all
+      dependency_name: "@types/*"
+  - match:
+      dependency_type: development
+      update_type: semver:minor
+  - match:
+      dependency_type: production
+      update_type: semver:patch
+
+  commit_message:
+    prefix: ⚙️
+    include_scope: true
